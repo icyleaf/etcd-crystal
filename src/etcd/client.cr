@@ -16,7 +16,6 @@ module Etcd
       yield @config
     end
 
-
     # Returns the etcd api version that will be used for across API methods
     def version_prefix
       "/v2"

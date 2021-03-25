@@ -24,7 +24,7 @@ module Etcd
     # * value - value to be set for specified key
     # * ttl   - shelf life of a key (in seconds) (optional)
     def set(key : String, opts : Options = Options.new) : Response
-      path  = key_endpoint + key
+      path = key_endpoint + key
       payload = {} of Symbol => JSON::Any::Type
       [:ttl, :value, :dir, :prevExist, :prevValue, :prevIndex].each do |k|
         payload[k] = opts[k] if opts.has_key?(k)
@@ -32,7 +32,6 @@ module Etcd
       response = api_execute(path, "PUT", payload)
       Response.from_http_response(response)
     end
-
 
     # Deletes a key (and its content)
     #
@@ -42,7 +41,6 @@ module Etcd
       response = api_execute(key_endpoint + key, "DELETE", opts)
       Response.from_http_response(response)
     end
-
 
     # Set a new value for key if previous value of key is matched
     #
@@ -55,7 +53,6 @@ module Etcd
       raise ArgumentError.new("You must pass prevValue") unless opts.has_key?(:prevValue)
       set(key, opts)
     end
-
 
     # Gives a notification when specified key changes
     #
@@ -80,7 +77,7 @@ module Etcd
     end
 
     def create_in_order(dir : String, opts : Options = Options.new) : Response
-      path  = key_endpoint + dir
+      path = key_endpoint + dir
       payload = {} of Symbol => JSON::Any::Type
       [:ttl, :value].each do |k|
         payload[k] = opts[k] if opts.has_key?(k)

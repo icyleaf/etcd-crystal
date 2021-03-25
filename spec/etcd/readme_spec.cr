@@ -62,7 +62,6 @@ describe "Etcd specs for the main etcd README examples" do
     end
   end
 
-
   describe "change the value of a key named '/message'" do
     # it_should_behave_like 'response with valid http headers'
     # it_should_behave_like 'response with valid node data'
@@ -106,8 +105,8 @@ describe "Etcd specs for the main etcd README examples" do
   end
 
   describe "waiting for a change against a key named '/message'" do
-  #  it_should_behave_like 'response with valid http headers'
-  #  it_should_behave_like 'response with valid node data'
+    #  it_should_behave_like 'response with valid http headers'
+    #  it_should_behave_like 'response with valid node data'
 
     it "should set the return action to SET" do
       wait_change_response.action.should eq("set")
@@ -262,7 +261,7 @@ describe "Etcd specs for the main etcd README examples" do
     it "should allow recursive directory listing" do
       client.set("/foo_dir/foo", {:value => "bar"})
       response = client.get("/", {:recursive => true}).not_nil!
-      response.children.find{|n| n.key == "/foo_dir" }.not_nil!.children.size.should_not eq(0)
+      response.children.find { |n| n.key == "/foo_dir" }.not_nil!.children.size.should_not eq(0)
     end
 
     it "should be able to delete empty directory without the recursive flag" do

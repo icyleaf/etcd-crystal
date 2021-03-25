@@ -18,7 +18,6 @@ module Etcd
   # as an argument which gets passed to the Etcd::Client.new method
   # directly
 
-
   def self.client(addr : String = "localhost:2379") : Etcd::Client
     Etcd::Client.new([addr])
   end
